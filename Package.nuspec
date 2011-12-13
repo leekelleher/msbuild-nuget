@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MSBuild.NuGet.Tasks</id>
+    <version>0.0.0</version>
+    <title>MSBuild.NuGet.Tasks</title>
+    <authors>Matt Brailsford</authors>
+    <owners>Matt Brailsford</owners>
+    <projectUrl>http://blog.mattbrailsford.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Installs a set of MSBuild tasks for automating NuGet file creation</description>
+    <summary>Installs a set of MSBuild tasks for automating NuGet file creation</summary>
+    <language />
+  </metadata>
+  <files />
+</package>
