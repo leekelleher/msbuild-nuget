@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Package">
+
+  <!-- 
+  	****************************************
+  	* IMPORTS
+	****************************************
+  -->
+  <PropertyGroup>
+  	<MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
+  	<MSBuildNuGetTasksPath>$(MSBuildProjectDirectory)\Src\MSBuild.NuGet.Tasks\Bin\Release</MSBuildNuGetTasksPath>
+  </PropertyGroup>
+  
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+  <Import Project="$(MSBuildNuGetTasksPath)\MSBuild.NuGet.Tasks.Targets" />
+
+  <!-- 
+  	****************************************
+  	* PROPERTIES
+	****************************************
+  -->
+  <PropertyGroup>
+	<PackageVersion>1.0</PackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+	<RootDir>$(MSBuildProjectDirectory)</RootDir>
+	<BuildDir>$(RootDir)\Build</BuildDir>
+	<PackageDir>$(RootDir)\Package</PackageDir>
+	<ProjectDir>$(RootDir)\Src\MSBuild.NuGet.Tasks</ProjectDir>
+  </PropertyGroup>
+  
+  <!-- 
+  	****************************************
+  	* TARGETS
+	****************************************
+  -->
+  
+  <!-- CLEAN -->
+  <Target Name="Clean">
+	<RemoveDir Directories="$(BuildDir)" Condition="Exists('$(BuildDir)')" />
+  	<RemoveDir Directories="$(PackageDir)" Condition="Exists('$(PackageDir)')" />
+	<MakeDir Directories="$(BuildDir)" />
+  	<MakeDir Directories="$(PackageDir)" />
+  </Target>
+  
+  <!-- COMPILE -->
+  <Target Name="Compile" DependsOnTargets="Compile">
+	<!-- We are compiling in a seperate build script first to ensure the dlls and tasks used in this script are ready -->
+  </Target>
+    
+  <!-- PREPAIRE FILES --> 
+  <Target Name="PrepairFiles" DependsOnTargets="Clean">
+    <ItemGroup>
+      <BinFiles Include="$(ProjectDir)\Bin\Release\*.dll" /> 
+      <BinFiles Include="$(ProjectDir)\Bin\Release\*.targets" />
+      <PackageFile Include="$(RootDir)\Package.nuspec" /> 
+    </ItemGroup>
+	<Copy SourceFiles="@(BinFiles)" DestinationFolder="$(BuildDir)\lib" />
+	<Copy SourceFiles="@(PackageFile)" DestinationFolder="$(BuildDir)" />
+  </Target> 
+  
+  <!-- MANIFEST -->
+  <Target Name="Manifest" DependsOnTargets="PrepairFiles">
+	<ItemGroup>
+      <ManifestFiles Include="$(BuildDir)\**\*" Exclude="$(BuildDir)\Package.nuspec" />
+    </ItemGroup>
+	<ManifestUpdate 
+		ManifestFile="$(BuildDir)\Package.nuspec"
+		WorkingDirectory="$(BuildDir)"
+		Version="$(PackageVersion)"
+	    Files="@(ManifestFiles)" />
+  </Target> 
+    
+  <!-- PACKAGE -->
+  <Target Name="Package" DependsOnTargets="Manifest">
+	<Pack NuGetExePath="$(RootDir)\Tools\NuGet\NuGet.exe" 
+		ManifestFile="$(BuildDir)\Package.nuspec" 
+		BasePath="$(BuildDir)" 
+		OutputDirectory="$(PackageDir)" 
+		Verbose="true" />
+  </Target> 
+  
+</Project>

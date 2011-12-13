@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Compile">
+
+  <!-- 
+  	****************************************
+  	* PROPERTIES
+	****************************************
+  -->
+  <PropertyGroup>
+	<RootDir>$(MSBuildProjectDirectory)</RootDir>
+	<ProjectDir>$(RootDir)\Src\MSBuild.NuGet.Tasks</ProjectDir>
+  </PropertyGroup>
+  
+  <!-- 
+  	****************************************
+  	* TARGETS
+	****************************************
+  -->
+  
+  <!-- COMPILE -->
+  <Target Name="Compile">
+	<MSBuild Projects="$(ProjectDir)\MSBuild.NuGet.Tasks.csproj" Properties="Configuration=Release" />
+  </Target>
+  
+</Project>
