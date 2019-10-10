@@ -4,3 +4,6 @@ _ReSharper.*
 *.user
 *.suo
 Build/*
+.vs
+[Oo]bj/
+[Bb]in/
