@@ -19,6 +19,7 @@ namespace MSBuild.NuGet.Tasks
         public string OutputDirectory { get; set; }
         public string BasePath { get; set; }
         public bool Verbose { get; set; }
+        public string Verbosity { get; set; }
         public string Version { get; set; }
         public string Exclude { get; set; }
         public bool Symbols { get; set; }
@@ -89,7 +90,7 @@ namespace MSBuild.NuGet.Tasks
             sb.AppendStringArg("Version", Version);
             sb.AppendStringArg("Exclude", Exclude);
             sb.AppendStringArg("Properties", Properties);
-            sb.AppendBoolArg("Verbose", Verbose);
+            sb.AppendStringArg("Verbosity", !string.IsNullOrWhiteSpace(Verbosity) ? Verbosity : Verbose ? "detailed" : "quiet");
             sb.AppendBoolArg("Symbols", Symbols);
             sb.AppendBoolArg("Tools", Tools);
             sb.AppendBoolArg("Build", Build);
