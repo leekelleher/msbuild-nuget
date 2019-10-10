@@ -8,5 +8,5 @@
 
   <UsingTask AssemblyFile="$(MSBuildNuGetTasksLib)" TaskName="MSBuild.NuGet.Tasks.ManifestUpdate" />
   <UsingTask AssemblyFile="$(MSBuildNuGetTasksLib)" TaskName="MSBuild.NuGet.Tasks.Pack" />
-  
+
 </Project>

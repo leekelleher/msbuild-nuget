@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using MSBuild.NuGet.Tasks.Util;
-using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using MSBuild.NuGet.Tasks.Util;
 
 namespace MSBuild.NuGet.Tasks
 {
@@ -61,7 +58,7 @@ namespace MSBuild.NuGet.Tasks
                     }
                 };
 
-                Log.LogMessage("Executing "+ NuGetExePath + " "+ this.ToArgsString() + Environment.NewLine);
+                Log.LogMessage("Executing " + NuGetExePath + " " + this.ToArgsString() + Environment.NewLine);
 
                 process.Start();
                 process.WaitForExit();

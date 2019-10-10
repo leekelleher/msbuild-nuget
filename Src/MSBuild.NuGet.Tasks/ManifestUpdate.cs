@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
-using MSBuild.NuGet.Tasks.Util;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using MSBuild.NuGet.Tasks.Util;
 
 namespace MSBuild.NuGet.Tasks
 {
